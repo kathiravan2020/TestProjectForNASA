@@ -1,43 +1,55 @@
 package NASATechTransfer;
 
 import static org.testng.Assert.assertEquals;
+
+import java.util.ArrayList;
+
 import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class GetResultsFromNASA{
+public class GetResultsFromNASA {
 
-@Test
-public void retrieveResultsFromNASA() {
+	@Test
+	public void retrieveResultsFromNASA() {
 
- RestAssured.baseURI = "https://api.nasa.gov";
- Response response = null;
+		// Base URI
 
- try {
+		RestAssured.baseURI = "https://api.nasa.gov";
+		Response response = null;
 
-   response = RestAssured.given()
+		// Try catch block to handle exceptions
+		// To access web services, generated api key
+		try {
 
-    .when()
+			response = RestAssured.given()
 
-    .get("/techtransfer?api_key=vAtBDqxxfOXNaVRUJuTqzq2vEpTsncZPzC7fnKjF");
+					.when()
 
-  } catch (Exception e) {
+					.get("/techtransfer/patent/?engine&api_key=vAtBDqxxfOXNaVRUJuTqzq2vEpTsncZPzC7fnKjF");
 
-   e.printStackTrace();
+		} catch (Exception e) {
 
-  }
+			e.printStackTrace();
 
- 
+		}
 
-  System.out.println("Response :" + response.asString());
+		// To get results from web services
+		System.out.println("Response :" + response.asString());
 
-  System.out.println("Status Code :" + response.getStatusCode());
+		// To get status code 200 from web services
+		System.out.println("Status Code :" + response.getStatusCode());
 
-  assertEquals(200, response.getStatusCode());
+		// Using assert keyword to validate expected response code with actual response code
+		assertEquals(200, response.getStatusCode());
+		
+		
+		//create an object for a JSAON file because array of list of list
+		NASAResult[] techtransferresults = response.jsonPath().getObject("result", NASAResult[].class);
+		
+		
+
+	}
+
 }
-
-
-
-}
-
  
