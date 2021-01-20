@@ -20,7 +20,7 @@ public class GetDataFromNASADemo {
 		Assert.assertEquals(code, 200);
 
 	}
-
+//edited this document to reflect at eclipse for Pull function
 	@Test
 
 	public void testResults() {		
