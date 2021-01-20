@@ -19,7 +19,7 @@ public void retrieveResultsFromNASA() {
 
     .when()
 
-    .get("/techtransfer");
+    .get("/techtransfer?api_key=vAtBDqxxfOXNaVRUJuTqzq2vEpTsncZPzC7fnKjF");
 
   } catch (Exception e) {
 
